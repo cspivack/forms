@@ -1,0 +1,32 @@
+{
+    "name": "cspivack/forms",
+    "description": "A simple, extensible package for generating forms in Laravel",
+    "type": "library",
+    "require": {
+        "laravel/framework": "^6.11"
+    },
+    "require-dev": {
+        "fzaninotto/faker": "^1.9",
+        "phpunit/phpunit": "^8.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "Cspivack\\Forms\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Cspivack\\Forms\\Tests\\": "tests/"
+        }
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "cspivack",
+            "email": "spivack.craig@gmail.com"
+        }
+    ],
+    "scripts": {
+        "test": "docker run --rm --interactive --volume $PWD:/app  php:alpine app/vendor/bin/phpunit app"
+    }
+}
