@@ -36,9 +36,17 @@ class Form
         return $html;
     }
 
+    protected static function getArray(object $object) : array
+    {
+        if(method_exists($object, 'toArray'))
+            return $object->toArray();
+
+        return (array) $object;
+    }
+
     protected function formatData() : void
     {
-        $data = (is_object($this->data)) ? (array) $this->data : $this->data;
+        $data = (is_object($this->data)) ? $this->getArray($this->data) : $this->data;
 
         foreach(old() as $key => $value)
             $data[$key] = old($key);
