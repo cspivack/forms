@@ -11,6 +11,7 @@ class Form
     protected $fields;
     protected $rules;
     protected $messages;
+    protected $exclude;
     protected $mapped = false;
 
     public function __construct(array $formConfig, $data=[])
@@ -19,6 +20,7 @@ class Form
         $this->fields = $formConfig['fields'];
         $this->rules = $formConfig['rules'] ?? [];
         $this->messages = $formConfig['messages'] ?? [];
+        $this->exclude = $formConfig['exclude'] ?? [];
     }
 
     protected function printField(Fields\BaseField $field) : string
@@ -66,14 +68,17 @@ class Form
 
         $this->formatData();
 
-        $this->fields = array_map(function ($config) {
+        $this->fields = array_filter(array_map(function ($config) {
+
+            if(in_array($config['name'], $this->exclude))
+                return null;
 
             $type = Arr::pull($config, 'type');
             $value = $this->data[$config['name']] ?? null;
 
             return new $type($config, $value);
 
-        }, $this->fields);
+        }, $this->fields));
     }
 
     public function html() : string
