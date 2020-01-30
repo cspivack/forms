@@ -7,9 +7,7 @@ class Textarea extends BaseField
 
     public function html() : string
     {
-        $label = $this->getLabel();
-
-        $html = $label;
+        $html = $this->getLabel();
         $html.= '<textarea id="'.$this->name.'" name="'.$this->name.'"';
 
         $html = $this->addAttributes($html);
