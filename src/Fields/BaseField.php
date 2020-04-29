@@ -31,6 +31,9 @@ abstract class BaseField
 
     public function getOptions() : array
     {
+        if(is_string($this->options) && class_exists($this->options))
+            $this->options = (new $this->options)->toOptions();
+
         if($this->associative($this->options))
             return $this->options;
 
